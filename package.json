@@ -1,0 +1,12 @@
+{
+  "name": "@kingdutch/reason-fetch",
+  "version": "0.0.1",
+  "description": "ReasonML bindings for browser and Node.js fetch implementation.",
+  "main": "index.js",
+  "repository": "git@github.com/Kingdutch/reason-fetch.git ",
+  "author": "Alexander Varwijk <git@alexandervarwijk.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "bs-platform": "7.2.2"
+  }
+}
