@@ -40,3 +40,25 @@ fetch("http://httpbin.org/bytes/1024", ~init=Init.t(~signal=controller.signal, (
 ->Promise.get(result_printer("/bytes/1024"));
 controller
   ->AbortController.abort;
+
+// Example of a failed clone.
+fetch("http://httpbin.org/json")
+->Promise.get(result => {
+  switch (result) {
+    | Ok(response) => {
+      response
+        ->Kingdutch__ReasonFetch__Response.json
+        ->Promise.get(jsonR => {
+          Js.log("/json");
+          switch (jsonR) {
+            | Ok(json) => Js.log(json)
+            | Error(`ResponseBodyRead(e)) => Js.log2("ResposeBodyRead", e)
+            | Error(`JsonParseError(e)) => Js.log2("JsonParseError", e)
+            | Error(`UnknownError(e)) => Js.log2("UnknownError", e)
+          }
+        }
+      )
+    }
+    | Error(_) => Js.log("Unexpected error in clone fail example")
+  }
+})

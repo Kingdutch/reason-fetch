@@ -1,4 +1,3 @@
-type response;
 type fetchError = [
   | `FetchError(string)
   | `FetchAborted
@@ -8,7 +7,7 @@ type init = Kingdutch__ReasonFetch__Init.t;
 
 // Simple binding to the browser fetch function returning a rejectable promise.
 [@bs.val]
-external fetchRaw : (string, ~init: init = ?, unit) => Promise.Js.t(response, Js.Exn.t) = "fetch";
+external fetchRaw : (string, ~init: init = ?, unit) => Promise.Js.t(Kingdutch__ReasonFetch__Response.t, Js.Exn.t) = "fetch";
 
 // Raw JS code to determine the error type.
 let getErrorType : Js.Exn.t => string = [%raw {|
