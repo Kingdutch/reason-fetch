@@ -11,6 +11,7 @@ let result_printer = message => result => switch (result) {
 };
 
 open Kingdutch__ReasonFetch;
+module AbortController = Kingdutch__ReasonFetch__AbortController;
 module Init = Kingdutch__ReasonFetch__Init;
 
 // Successful request
@@ -32,3 +33,10 @@ fetch("https://httpbin.org/post", ~init=Init.make(~_method="POST", ()))
 // Trigger a CORS error.
 fetch("https://httpbin.org/get", ~init=Init.make(~mode="same-origin",()))
 ->Promise.get(result_printer("CORS Error /get"));
+
+// Example of an aborted fetch.
+let controller = AbortController.make();
+fetch("http://httpbin.org/bytes/1024", ~init=Init.make(~signal=controller.signal, ()))
+->Promise.get(result_printer("/bytes/1024"));
+controller
+  ->AbortController.abort;

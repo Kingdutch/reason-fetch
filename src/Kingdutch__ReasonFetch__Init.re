@@ -2,7 +2,6 @@ type t;
 
 type headers;
 type bodyInit;
-type signal;
 
 [@bs.obj]
 external make : (
@@ -17,7 +16,7 @@ external make : (
   ~redirect:       string=?,
   ~integrity:      string=?,
   ~keepalive:      bool=?,
-  ~signal:         signal=?,
+  ~signal:         Kingdutch__ReasonFetch__AbortController.signal=?,
   unit
 ) => t = "";
 

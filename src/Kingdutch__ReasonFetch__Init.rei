@@ -2,7 +2,6 @@ type t;
 
 type headers;
 type bodyInit;
-type signal;
 
 let make: (
   ~_method :        string=?,
@@ -16,6 +15,6 @@ let make: (
   ~redirect :       string=?,
   ~integrity :      string=?,
   ~keepalive :      bool=?,
-  ~signal :         signal=?,
+  ~signal :         Kingdutch__ReasonFetch__AbortController.signal=?,
   unit
 ) => t;
