@@ -28,3 +28,7 @@ fetch("http://localhost:9001")
 // Fetch POST with some data
 fetch("https://httpbin.org/post", ~init=Init.make(~_method="POST", ()))
 ->Promise.get(result_printer("/post"));
+
+// Trigger a CORS error.
+fetch("https://httpbin.org/get", ~init=Init.make(~mode="same-origin",()))
+->Promise.get(result_printer("CORS Error /get"));
