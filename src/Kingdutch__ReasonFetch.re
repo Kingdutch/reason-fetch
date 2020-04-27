@@ -1,13 +1,8 @@
 type response;
-type jsFetchError
-type unspecifiedFetchError;
 type fetchError = [
   | `FetchError(string)
   | `FetchAborted
 ];
-
-/* fetch resource types */
-type request;
 
 type init = Kingdutch__ReasonFetch__Init.t;
 
