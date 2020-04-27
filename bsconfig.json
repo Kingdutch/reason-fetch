@@ -15,7 +15,9 @@
   ],
   "suffix": ".bs.js",
   "namespace": false,
-  "bs-dependencies": [],
+  "bs-dependencies": [
+    "reason-promise"
+  ],
   "ppx-flags": [],
   "refmt": 3
 }
