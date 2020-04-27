@@ -6,7 +6,8 @@ documentWrite("Open the console for output.");
 // A simple result printer to convert an `option` to a console message.
 let result_printer = message => result => switch (result) {
   | Ok(s) => { Js.log2(message, "ok"); Js.log(s); }
-  | Error(s) => { Js.log2(message, "error"); Js.log(s); }
+  | Error(`FetchError(s)) => { Js.log2(message, "fetch error"); Js.log(s); }
+  | Error(`FetchAborted) => { Js.log2(message, "fetch aborted"); }
 };
 
 open Kingdutch__ReasonFetch;
