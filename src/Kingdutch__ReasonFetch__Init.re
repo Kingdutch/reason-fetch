@@ -1,51 +1,18 @@
-type t;
-
 type headers;
 type bodyInit;
 
-[@bs.obj]
-external make : (
-  ~_method:        string=?,
-  ~headers:        headers=?,
-  ~body:           bodyInit=?,
-  ~referrer:       string=?,
-  ~referrerPolicy: string=?,
-  ~mode:           string=?,
-  ~credentials:    string=?,
-  ~cache:          string=?,
-  ~redirect:       string=?,
-  ~integrity:      string=?,
-  ~keepalive:      bool=?,
-  ~signal:         Kingdutch__ReasonFetch__AbortController.signal=?,
-  unit
-) => t = "";
-
-let make = (
-  ~_method = ?,
-  ~headers = ?,
-  ~body = ?,
-  ~referrer = ?,
-  ~referrerPolicy = ?,
-  ~mode = ?,
-  ~credentials = ?,
-  ~cache = ?,
-  ~redirect = ?,
-  ~integrity = ?,
-  ~keepalive = ?,
-  ~signal = ?,
-  ()
-) => make(
-  ~_method?,
-  ~headers?,
-  ~body?,
-  ~referrer?,
-  ~referrerPolicy?,
-  ~mode?,
-  ~credentials?,
-  ~cache?,
-  ~redirect?,
-  ~integrity?,
-  ~keepalive?,
-  ~signal?,
-  ()
-);
+[@bs.deriving abstract]
+type t = {
+  [@bs.optional] _method:        string,
+  [@bs.optional] headers:        headers,
+  [@bs.optional] body:           bodyInit,
+  [@bs.optional] referrer:       string,
+  [@bs.optional] referrerPolicy: string,
+  [@bs.optional] mode:           string,
+  [@bs.optional] credentials:    string,
+  [@bs.optional] cache:          string,
+  [@bs.optional] redirect:       string,
+  [@bs.optional] integrity:      string,
+  [@bs.optional] keepalive:      bool,
+  [@bs.optional] signal:         Kingdutch__ReasonFetch__AbortController.signal,
+};

@@ -27,16 +27,16 @@ fetch("http://localhost:9001")
 ->Promise.get(result_printer("localhost:9001"));
 
 // Fetch POST with some data
-fetch("https://httpbin.org/post", ~init=Init.make(~_method="POST", ()))
+fetch("https://httpbin.org/post", ~init=Init.t(~_method="POST", ()))
 ->Promise.get(result_printer("/post"));
 
 // Trigger a CORS error.
-fetch("https://httpbin.org/get", ~init=Init.make(~mode="same-origin",()))
+fetch("https://httpbin.org/get", ~init=Init.t(~mode="same-origin", ()))
 ->Promise.get(result_printer("CORS Error /get"));
 
 // Example of an aborted fetch.
 let controller = AbortController.make();
-fetch("http://httpbin.org/bytes/1024", ~init=Init.make(~signal=controller.signal, ()))
+fetch("http://httpbin.org/bytes/1024", ~init=Init.t(~signal=controller.signal, ()))
 ->Promise.get(result_printer("/bytes/1024"));
 controller
   ->AbortController.abort;
