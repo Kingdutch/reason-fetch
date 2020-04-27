@@ -1,5 +1,5 @@
 type signal;
-type t = {
+type t = pri {
   signal: signal
 };
 
