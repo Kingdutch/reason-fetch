@@ -2,12 +2,6 @@ type headers;
 type responseCode = int;
 type readableStream;
 
-type responseError = [
-  | `ResponseBodyRead(string)
-  | `JsonParseError(string)
-  | `UnknownError(string)
-];
-
 // TODO: The bodyUsed flag should be encoded in the type to avoid calling clone/json etc. twice.
 type t = pri {
   ok:             bool,
@@ -30,7 +24,7 @@ let cloneRaw : t => (bool, t, string) = [%raw {|
     }
   }
 |}];
-let clone : t => result(t, responseError) = r => switch(cloneRaw(r)) {
+let clone : t => result(t, [> `ResponseBodyRead(string)]) = r => switch(cloneRaw(r)) {
   | (true, c, _) => Ok(c)
   | (false, _, e) => Error(`ResponseBodyRead(e))
 };

@@ -1,8 +1,3 @@
-type fetchError = [
-  | `FetchError(string)
-  | `FetchAborted
-];
-
 type init = Kingdutch__ReasonFetch__Init.t;
 
 // Simple binding to the browser fetch function returning a rejectable promise.

@@ -41,24 +41,17 @@ fetch("http://httpbin.org/bytes/1024", ~init=Init.t(~signal=controller.signal, (
 controller
   ->AbortController.abort;
 
-// Example of a failed clone.
+// Example of fetching JSON data.
 fetch("http://httpbin.org/json")
-->Promise.get(result => {
-  switch (result) {
-    | Ok(response) => {
-      response
-        ->Kingdutch__ReasonFetch__Response.json
-        ->Promise.get(jsonR => {
-          Js.log("/json");
-          switch (jsonR) {
-            | Ok(json) => Js.log(json)
-            | Error(`ResponseBodyRead(e)) => Js.log2("ResposeBodyRead", e)
-            | Error(`JsonParseError(e)) => Js.log2("JsonParseError", e)
-            | Error(`UnknownError(e)) => Js.log2("UnknownError", e)
-          }
-        }
-      )
-    }
-    | Error(_) => Js.log("Unexpected error in clone fail example")
-  }
+->Promise.flatMapOk(Kingdutch__ReasonFetch__Response.json)
+->Promise.mapOk(json => {
+  Js.log("/json");
+  Js.log(json);
 })
+->Promise.getError(error => switch(error) {
+  | `ResponseBodyRead(e) => Js.log2("ResposeBodyRead", e)
+  | `JsonParseError(e) => Js.log2("JsonParseError", e)
+  | `UnknownError(e) => Js.log2("UnknownError", e)
+  | `FetchError(e) => Js.log2("There was an error requestig the json", e)
+  | `FetchAborted => Js.log("The fetch for json data was aborted")
+});
