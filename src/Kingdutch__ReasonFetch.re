@@ -37,4 +37,13 @@ let fetch  = (~init=?, url)  => {
   })
 }
 
+// Convert error types i reason-fetch to human-readable strings.
+let fetchErrorToString = fun
+  | `ResponseBodyRead(e) => "Response body already read: " ++ e
+  | `JsonParseError(e) => "Error parsing response as json: " ++ e
+  | `FetchError(e) => "There was an error during the request " ++ e
+  | `FetchAborted => "The fetch was aborted"
+  | `UnknownError(e) => "Unknown error in reaso-promise library " ++ e
+;
+
 // TODO: Implement fromRequest (second option for input type).

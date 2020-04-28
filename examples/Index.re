@@ -48,10 +48,5 @@ fetch("http://httpbin.org/json")
   Js.log("/json");
   Js.log(json);
 })
-->Promise.getError(error => switch(error) {
-  | `ResponseBodyRead(e) => Js.log2("ResposeBodyRead", e)
-  | `JsonParseError(e) => Js.log2("JsonParseError", e)
-  | `UnknownError(e) => Js.log2("UnknownError", e)
-  | `FetchError(e) => Js.log2("There was an error requestig the json", e)
-  | `FetchAborted => Js.log("The fetch for json data was aborted")
-});
+->Promise.mapError(fetchErrorToString)
+->Promise.getError(Js.log);
