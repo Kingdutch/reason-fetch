@@ -1,10 +1,9 @@
-type headers;
 type bodyInit;
 
 [@bs.deriving abstract]
 type t = {
   [@bs.optional] _method:        string,
-  [@bs.optional] headers:        headers,
+  [@bs.optional] headers:        Kingdutch__ReasonFetch__Headers.t,
   [@bs.optional] body:           bodyInit,
   [@bs.optional] referrer:       string,
   [@bs.optional] referrerPolicy: string,
