@@ -1,6 +1,6 @@
 {
   "name": "@kingdutch/reason-fetch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ReasonML bindings for browser fetch implementation.",
   "repository": "git@github.com/Kingdutch/reason-fetch.git ",
   "author": "Alexander Varwijk <git@alexandervarwijk.com>",
